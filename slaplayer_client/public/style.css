@@ -1,0 +1,116 @@
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    /* font-family: sans-serif; */
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+
+.App {
+    text-align: center;
+    color: #bbb;
+    overflow: auto;
+    height: 100%;
+}
+
+.toggle-video-btn {
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    font-size: 2vh;
+    color: black;
+    border: none;
+    background-color: rgba(0, 139, 186, 0.90);
+}
+
+.toggle-video-btn:hover {
+    background: #008CBA;
+}
+
+.toggle-video-btndiv {
+    left: 0px;
+    bottom: 0px;
+    position: absolute;
+    text-align: left;
+}
+
+.chat-div {
+    background-color: #333;
+    width: 20%;
+    display: inline-block;
+    bottom: 0px;
+    height: 100%;
+}
+
+#roomid {
+    padding: 2px;
+}
+
+.chatbox {
+    border: black solid 1px;
+    background-color: #222;
+    margin: 1px;
+    padding: -10px;
+    display: inline-block;
+    min-height: 1%;
+    height: 80%;
+    min-width: 1%;
+    width: 86%;
+    text-align: left;
+}
+
+.player-div {
+    float: right;
+    background: #222;
+    width: 80%;
+    height: 100%;
+}
+
+#player {
+    display: block;
+    width: 100%;
+    height: 99%;
+}
+
+.sliderDiv {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    margin-top: 20vh;
+    margin-bottom: 2vh;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 55%; /* Full-width */
+    height: 15px;
+    border-radius: 5px;   
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px;
+    border-radius: 50%; 
+    background: #008CBA; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px;
+    border-radius: 50%;
+    background: #008CBA; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}

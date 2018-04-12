@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <link rel="shortcut icon" href="./favicon.ico">
+  <link type="text/css" href="./public/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  <title>slaplayer 0.2</title>
+  <script>
+    function init() {
+      console.log(`init`);
+      document.getElementById('sliderDiv').style.display = "none";
+      feather.replace()
+    }
+
+    function videoDisabled() {
+      return document.getElementById('player').style.display == "none" ? true : false;
+    }
+
+    function toggleVideo() {
+      document.getElementById('player').style.display = document.getElementById('player').style.display == "none" ?
+        showVideo() : hideVideo();
+    }
+
+    function hideVideo() {
+      console.log(`HIDING VIDEO`);
+      document.getElementById('player').style.display = "none";
+      document.getElementById('sliderDiv').style.display = "block";
+    }
+
+    function showVideo() {
+      console.log(`RESTORING VIDEO`);
+      document.getElementById('player').style.display = "block";
+      document.getElementById('sliderDiv').style.display = "none";
+    }
+  </script>
+</head>
+
+<body onload="init()">
+  <noscript>
+    You need to enable JavaScript to run this page.
+  </noscript>
+  <div id="root">
+    <div class="App">
+      <div class="chat-div">
+        <p id="roomid">#room name</p>
+        <div class="chatbox">
+          text
+        </div>
+        <div class="toggle-video-btndiv">
+          <button class="toggle-video-btn" onclick="toggleVideo()">Toggle video?</button>
+        </div>
+      </div>
+      <div class="player-div">
+        <div id="player">
+          <script>
+            //  loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // creates an <iframe> (and YouTube player) after the API code downloads.
+            var player;
+
+            function onYouTubeIframeAPIReady() {
+              player = new YT.Player('player', {
+                height: '9',
+                width: '16',
+                videoId: '3TmRECNCan8',
+                playerVars: {
+                  // disables related videos that are shown on pause
+                  rel: 0
+                },
+                events: {
+                  'onReady': onPlayerReady,
+                  'onStateChange': onPlayerStateChange
+                }
+              });
+            }
+
+            function onPlayerReady(event) {
+              document.getElementById("slider").value = player.getVolume();
+              //event.target.playVideo(); // autoplay
+            }
+
+            // API calls this function when the player's state changes.
+            var done = false;
+
+            function onPlayerStateChange(event) {
+              if (devmode == true && event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 1234);
+                done = true;
+              }
+            }
+
+            function seekTo(t) {
+              player.seekTo(t);
+            }
+
+            function resumexor() {
+              if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                pauseVideo();
+              } else if (player.getPlayerState() == YT.PlayerState.PAUSED) {
+                playVideo();
+              } else if (player.getPlayerState() == YT.PlayerState.CUED) {
+                playVideo();
+              }
+            }
+
+            function playVideo() {
+              player.playVideo();
+              document.getElementById('playIcon').style.opacity = 0;
+              document.getElementById('pauseIcon').style.opacity = 1;
+            }
+
+            function pauseVideo() {
+              player.pauseVideo();
+              document.getElementById('playIcon').style.opacity = 1;
+              document.getElementById('pauseIcon').style.opacity = 0;
+            }
+
+            function stopVideo() {
+              player.stopVideo();
+            }
+
+            function setVolume(v) {
+              player.setVolume(v);
+            }
+          </script>
+        </div>
+        <div id="sliderDiv">
+          <input type="range" min="0" max="100" value="15" class="slider" id="slider" oninput="setVolume(this.value)" onchange="setVolume(this.value)">
+          </br>
+          <i onclick="resumexor()" id="playIcon" data-feather="play" style="position: absolute; opacity: 1;"></i>
+          <i onclick="resumexor()" id="pauseIcon" data-feather="pause" style="position: absolute; opacity: 0;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
