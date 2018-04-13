@@ -11,8 +11,14 @@
   <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   <title>slaplayer 0.2</title>
   <script>
+    var devmode = true;
+
+    function _log(s) {
+      if (devmode) console.log(s);
+    }
+
     function init() {
-      console.log(`init`);
+      _log(`init`);
       document.getElementById('sliderDiv').style.display = "none";
       feather.replace()
     }
@@ -27,13 +33,13 @@
     }
 
     function hideVideo() {
-      console.log(`HIDING VIDEO`);
+      _log(`HIDING VIDEO`);
       document.getElementById('player').style.display = "none";
       document.getElementById('sliderDiv').style.display = "block";
     }
 
     function showVideo() {
-      console.log(`RESTORING VIDEO`);
+      _log(`RESTORING VIDEO`);
       document.getElementById('player').style.display = "block";
       document.getElementById('sliderDiv').style.display = "none";
     }
